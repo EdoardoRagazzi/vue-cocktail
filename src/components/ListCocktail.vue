@@ -1,5 +1,5 @@
 <template>
-  <div class="listCharacter">
+  <div class="lista">
     <div v-for="(item, index) in listCocktails" :key="index"></div>
   </div>
 </template>
@@ -9,13 +9,12 @@
 import axios from "axios";
 
 export default {
-  name: "ListCharacter",
+  name: "ListCocktail",
 
   data() {
     return {
       apiKey: "1",
-      apiURL:
-        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=martini",
+      apiURL: "https://www.thecocktaildb.com/api/json/v1/1/search.php?",
       listCocktails: [],
       searchCocktail: "martini",
     };
@@ -28,14 +27,23 @@ export default {
       const request = {
         params: {
           api_key: this.apiKey,
-          query: this.searchCocktail,
+          s: this.searchCocktail,
         },
       };
 
       axios.get(this.apiURL, request).then((res) => {
-        console.log(res);
-        this.listCocktails = res.data;
-        console.log(this.listCocktails);
+        /* this.listCocktails = res.data.drinks; */
+
+        // CON UN CICLO FOR CICLIAMO L'ARRAY E PUSHAMO OGNI ELEMENTO
+        // for (var i = 0; i < res.data.drinks.length; i++) {
+        //   this.listCocktails.push(res.data.drinks[i].strDrink);
+        // }
+        // console.log(this.listCocktails);
+
+        // FUNZIONAAAAA  For each element push
+        res.data.drinks.forEach((elem) =>
+          this.listCocktails.push(elem.strDrink)
+        );
       });
     },
   },
