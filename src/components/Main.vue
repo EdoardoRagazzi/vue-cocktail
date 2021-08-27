@@ -1,10 +1,14 @@
 <template>
   <div class="main">
     <div class="split left">
-      <video autoplay muted loop id="myVideo">
+      <!-- prova con foto -->
+      <!-- <video autoplay muted loop id="myVideo">
         <h3>Cocktails</h3>
         <source src="../assets/smokey_glass.mp4" type="video/mp4" />
-      </video>
+      </video> -->
+
+      <img :src="linkGif" alt="cocktail">;
+      
     </div>
     <div class="split right">
       <video autoplay muted loop id="myVideo">
@@ -22,6 +26,11 @@ import ListCocktail from "@/components/ListCocktail.vue";
 
 export default {
   name: "Main",
+  data() {
+    return {
+      linkGif: require('../assets/' + Math.floor(Math.random() * 38 + 1) + '.gif'),
+    }
+  },
   components: {
     ListCocktail,
   },
